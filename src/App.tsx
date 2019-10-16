@@ -3,7 +3,7 @@ import Editor from './Editor';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div style={{width: 500}}>
       <Editor />
     </div>
   );

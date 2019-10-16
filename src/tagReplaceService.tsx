@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { string } from 'prop-types';
+import React, { Component, useState, CSSProperties } from 'react';
+import { getCSSForJSX } from './cssConverterService';
+import { convertAllAttributes, AllJSXAttributes } from './attributesConverterService';
+import {renderToString} from 'react-dom/server'
 
 const WhiteHTMLTags =
 {
@@ -28,12 +30,13 @@ const WhiteHTMLTags =
     sub: "sub",
     sup: "sup"
 };
-const GrayHTMLTags =  {
-    a: "a", 
+const GrayHTMLTags = {
+    a: "a",
     img: "img"
 };
 
-type WhiteHTMLAttributs = "style" | "title" | "class" | "id";
+
+
 
 interface IAttrConfiguration {
     attrName: string;
@@ -90,6 +93,9 @@ const GrayTagConfiguration: ITagConfiguration[] = [
 
 interface TagProps extends ChildNodeProps {
     tagName: string;
+    attributes?: AllJSXAttributes;
+    uniq_key: string;
+    value: string;
 }
 
 interface ChildNodeProps {
@@ -108,21 +114,32 @@ export const ChildNodes: React.SFC<ChildNodeProps> = (props) => {
     let rootNode: ChildNode = getRootDOMNode(props.value!);
     let childNodes: NodeListOf<ChildNode> = rootNode.childNodes;
     let arrayOfChildNodes: HTMLElement[] = Array.from(childNodes) as HTMLElement[];
+    console.log(arrayOfChildNodes);
     let allNodes = arrayOfChildNodes.map((el, index) => {
+
+        let attributes: AllJSXAttributes = convertAllAttributes(el.attributes);
+        
         if (el.tagName in WhiteHTMLTags) {
-            return getTag({ value: el.outerHTML, uniq_key: `${props.uniq_key}_${el.tagName}_${index}`, tagName: el.tagName })
+            return getTag({
+                value: el.outerHTML,
+                uniq_key: `${props.uniq_key}_${el.tagName}_${index}`,
+                tagName: el.tagName, 
+                attributes
+            })
+        } else if (el.tagName in GrayHTMLTags) {
+
         } else if (el.nodeName === "#text") {
-            if (props.uniq_key.indexOf("p") === -1){
-                return getTag({value: `<p>${el.nodeValue!}</p>`, uniq_key: `${props.uniq_key}_p_${index}`, tagName: 'p'})
+            if (props.uniq_key.indexOf("p") === -1) {
+                return getTag({ value: `<p>${el.nodeValue!}</p>`, uniq_key: `${props.uniq_key}_p_${index}`, tagName: 'p' })
             }
             return getTextNode({ value: el.nodeValue!, uniq_key: `${props.uniq_key}_text_${index}`, tagName: "text" })
         } else
             return null;
 
     });
-    if (rootNode.nodeName === 'article' && allNodes.filter(Boolean).length === 0){
-        allNodes.push(getTag({value: `<p></p>`, uniq_key: `${props.uniq_key}_p_${0}`, tagName: 'p'}))
-    } 
+    if (rootNode.nodeName === 'article' && allNodes.filter(Boolean).length === 0) {
+        allNodes.push(getTag({ value: `<p></p>`, uniq_key: `${props.uniq_key}_p_${0}`, tagName: 'p' }))
+    }
     return (<React.Fragment>{allNodes}</React.Fragment>)
 }
 
@@ -137,31 +154,35 @@ export class ArticleDOMNode extends Component<HTMLEditorProps> {
     componentDidMount() {
         this.articleRef!.addEventListener('DOMSubtreeModified', (e) => this.onDomeNodeChange(`<article>${this.articleRef!.outerHTML.replace(/<article[^>]*>/, '').replace('</article>', '')}</article>`))
         //this.articleRef!.addEventListener('DOMSubtreeModified', (e) => this.props.onChange(`<article>${this.articleRef!.innerHTML}</article>`))
-        this.articleRef!.addEventListener('paste', (e) => {
+        this.articleRef!.addEventListener('paste', (e: ClipboardEvent) => {
             e.preventDefault();
-            const text = ((e as any).originalEvent || e).clipboardData.getData('text/plain');
-            window.document.execCommand('insertText', false, text);
+            const html = ((e as any).originalEvent || e).clipboardData.getData('text/html');
+            window.document.execCommand('insertHTML', false, renderToString(<ChildNodes value={html} uniq_key="clipboard_unique_key" />));
         });
     }
     onDomeNodeChange = (value: string) => {
         this.props.onChange(value)
     }
-    shouldComponentUpdate(nextProps: HTMLEditorProps){
+    shouldComponentUpdate(nextProps: HTMLEditorProps) {
         let response: boolean = `<article>${this.articleRef!.innerHTML}</article>` !== nextProps.value;
         return response;
     }
     render() {
         return (
-            <article ref={(elem: HTMLElement) => this.articleRef = elem!} suppressContentEditableWarning={true} contentEditable key={'article_editor'}><ChildNodes value={`<article>${this.props.value.replace(/<article[^>]*>/, '').replace('</article>', '')}</article>`} uniq_key={'article_editor'} /></article>
+            <article id="HTMLTextEditor" ref={(elem: HTMLElement) => this.articleRef = elem!} suppressContentEditableWarning={true} contentEditable key={'article_editor'}><ChildNodes value={`<article>${this.props.value.replace(/<article[^>]*>/, '').replace('</article>', '')}</article>`} uniq_key={'article_editor'} /></article>
         )
     }
 }
 
+
+
 const getTag: React.SFC<TagProps> = (props) => {
-    return React.createElement(props.tagName, { key: props.uniq_key }, <ChildNodes value={props.value} uniq_key={props.uniq_key} />)
+    return React.createElement(props.tagName, { key: props.uniq_key, ...props.attributes }, <ChildNodes value={props.value} uniq_key={props.uniq_key} />)
 }
 
 const getTextNode: React.SFC<TagProps> = (props) => {
     return <React.Fragment key={props.uniq_key}>{props.value}</React.Fragment>;
 }
+
+
 

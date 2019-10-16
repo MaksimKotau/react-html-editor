@@ -1,3 +1,31 @@
+article {
+    border: 1px solid #999
+}
+
 article p {
     min-height: 1.5rem
+}
+
+#htmleditor_toolbar .toolBarButton {
+    user-select:none;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    border: 1px solid #999;
+    text-align: center;
+    min-width: 20px;
+    border-radius: 2px;
+    width: fit-content;
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px;
+    /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.19); */
+}
+#htmleditor_toolbar .toolBarButton:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 8px 0 rgba(0, 0, 0, 0.19);
+}
+
+#htmleditor_toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 }

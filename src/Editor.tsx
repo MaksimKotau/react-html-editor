@@ -10,7 +10,7 @@ class Editor extends Component<{}, OwnState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            value: ""
+            value: "<p>dfgdsgf<i id='frf' title='ghfdgdsg' style='color:blue; margin-left: 20px'>df,</i>sd<a href='www.tut.by'>fsd</a>fsd</p>"
         }
     }
     render() {
