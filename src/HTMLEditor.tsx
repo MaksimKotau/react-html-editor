@@ -3,41 +3,24 @@ import './HTMLEditor.css';
 import { ArticleDOMNode } from './tagReplaceService'
 import ToolbarButton, { ToolbarButtonProps } from './ToolbarButton'
 import TextColorSelect from './buttonForms/TextColorSelect';
-
+import sd from './buttonForms/BoldTextButton';
+import BoldTextButton from './buttonForms/BoldTextButton';
+import ItalicTextButton from './buttonForms/ItalicTextButton';
+import UnderlinedTextButton from './buttonForms/UnderlinedTextButton';
+import AddLinkButton from './buttonForms/AddLinkButton';
 
 const buttons: ToolbarButtonProps[] = [
   {
-    element: <span
-      onClick={() => {
-        document.execCommand("bold", false)
-      }}
-    >B</span>
+    element: <BoldTextButton/>
   },
   {
-    element: <span
-      onClick={() => {
-        document.execCommand("italic", false)
-      }}
-      style={{ fontStyle: "italic" }}>
-      I
-      </span>
+    element: <ItalicTextButton/>
   },
   {
-
-    element: <span
-      onClick={() => {
-        document.execCommand("underline", false)
-      }}
-      style={{ textDecoration: "underline" }}>
-      U
-      </span>
+    element: <UnderlinedTextButton/>
   },
   {
-    element: <span
-      onClick={() => {
-        document.execCommand("createlink", false, "www.tut.by")
-      }}
-    >&#128279;</span>
+    element: <AddLinkButton/>
   },
   {
     element: <TextColorSelect />

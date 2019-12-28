@@ -18,7 +18,7 @@ class Editor extends Component<{}, OwnState> {
             <div>
                 <HTMLEditor value={this.state.value} onChange={this.onChange} />
             </div>
-        );
+        );  
     }
     onChange = (value: string) => {
         this.setState({ value: value })

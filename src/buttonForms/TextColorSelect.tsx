@@ -12,13 +12,25 @@ const TextColorSelect: React.SFC = () => {
         event.preventDefault();
         document.execCommand("forecolor", false, color);
     }
-    return (            
-            <div style={{float: "left"}}>
-                <label style={{paddingLeft: 6, paddingRight: 6}} htmlFor="HTMLEditor_textColor_button" onClick={onLabelClick}>T</label>
-                <div style={{width: 21, position: "absolute", height: 3, backgroundColor: color}}>
-                <input  ref={colorEl} id="HTMLEditor_textColor_button" type="color" style={{width:18, height: 1}} onChange={onChange}/>
+    return (
+        <div style={{ display: "flex", flexGrow: 1 }}>
+            <div style={{ flexGrow: 5, flexDirection: "column", display: "flex" }}>
+                <div style={{ flexGrow: 1, justifyContent: "center", display: "flex", flexDirection: "column" }}>
+                    <div>
+                        <label onClick={onLabelClick}>T</label>
+                    </div>
                 </div>
+                <div style={{ width: "100%", height: 5, backgroundColor: color }}></div>
             </div>
+            <div style={{ borderLeft: "1px solid gray", width: 8, display: "flex", flexDirection: "column" }}>
+            <label htmlFor="toolBarButtonColorChooser" style={{ flexGrow: 1, display: "flex", fontSize: 13, transform: "rotate(180deg)" }}>^</label>
+                <input id="toolBarButtonColorChooser" ref={colorEl} type="color" style={{ width: 8, height: 7, padding: 0, margin: 0, border: 0, opacity: 0 }} onChange={onChange} />
+                
+            </div>
+
+        </div>
+
+
     );
 };
 
