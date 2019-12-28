@@ -1,7 +1,8 @@
 import React, { Component, useState, CSSProperties } from 'react';
 import { getCSSForJSX } from './cssConverterService';
 import { convertAllAttributes, AllJSXAttributes } from './attributesConverterService';
-import {renderToString} from 'react-dom/server'
+import { renderToString } from 'react-dom/server';
+import  {GrayHTMLTags, sanitizeGrayTags, WhiteAndGrayAttributes} from './grayTagSanityzerService';
 
 const WhiteHTMLTags =
 {
@@ -28,66 +29,9 @@ const WhiteHTMLTags =
     s: "s",
     samp: "samp",
     sub: "sub",
-    sup: "sup"
+    sup: "sup",
+    font: "font"
 };
-const GrayHTMLTags = {
-    a: "a",
-    img: "img"
-};
-
-
-
-
-interface IAttrConfiguration {
-    attrName: string;
-    attrCleaner?: (attrValue: string) => string;
-}
-
-interface ITagConfiguration {
-    tagName: string;
-    attrConfig: IAttrConfiguration[]
-}
-
-const attributeJSSanitizer = (value: string): string => {
-    return value.toLowerCase().indexOf('javascript') > -1 ? "javascript:void(0)" : value;
-}
-const GrayTagConfiguration: ITagConfiguration[] = [
-    {
-        tagName: "a",
-        attrConfig: [
-            {
-                attrName: "href",
-                attrCleaner: attributeJSSanitizer
-            },
-            {
-                attrName: "target",
-                attrCleaner: attributeJSSanitizer
-            },
-            {
-                attrName: "rel",
-                attrCleaner: attributeJSSanitizer
-            }
-        ]
-    },
-    {
-        tagName: "img",
-        attrConfig: [
-            {
-                attrName: "src",
-                attrCleaner: attributeJSSanitizer
-            },
-            {
-                attrName: "alt",
-            },
-            {
-                attrName: "height",
-            },
-            {
-                attrName: "width",
-            }
-        ]
-    },
-];
 
 
 
@@ -116,18 +60,22 @@ export const ChildNodes: React.SFC<ChildNodeProps> = (props) => {
     let arrayOfChildNodes: HTMLElement[] = Array.from(childNodes) as HTMLElement[];
     console.log(arrayOfChildNodes);
     let allNodes = arrayOfChildNodes.map((el, index) => {
-
-        let attributes: AllJSXAttributes = convertAllAttributes(el.attributes);
-        
         if (el.tagName in WhiteHTMLTags) {
+            let attributes: WhiteAndGrayAttributes = convertAllAttributes(el.attributes);
             return getTag({
                 value: el.outerHTML,
                 uniq_key: `${props.uniq_key}_${el.tagName}_${index}`,
-                tagName: el.tagName, 
+                tagName: el.tagName,
                 attributes
             })
         } else if (el.tagName in GrayHTMLTags) {
-
+            let attributes: WhiteAndGrayAttributes = sanitizeGrayTags(el.tagName, el.attributes);
+            return getTag({
+                value: el.outerHTML,
+                uniq_key: `${props.uniq_key}_${el.tagName}_${index}`,
+                tagName: el.tagName,
+                attributes
+            })
         } else if (el.nodeName === "#text") {
             if (props.uniq_key.indexOf("p") === -1) {
                 return getTag({ value: `<p>${el.nodeValue!}</p>`, uniq_key: `${props.uniq_key}_p_${index}`, tagName: 'p' })
