@@ -1,5 +1,4 @@
 import {AllJSXAttributes, convertAllAttributes} from './attributesConverterService';
-import { AriaAttributes, ImgHTMLAttributes } from 'react';
 
 const attributeJSSanitizer = (value: string): string => {
     return value.toLowerCase().indexOf('javascript') > -1 ? "" : value;

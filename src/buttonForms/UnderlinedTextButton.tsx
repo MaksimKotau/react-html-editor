@@ -6,7 +6,7 @@ const UnderlinedTextButton: React.SFC<{}> = () => {
             <span
             style={{display: "flex", flexDirection: "row", flexGrow: 1, justifyContent: "center", textDecoration: "underline"}}
                 onClick={() => {
-                    document.execCommand("createlink", false, "www.tut.by")
+                    document.execCommand("underline", false)
                 }}
             >U</span>
         </div>

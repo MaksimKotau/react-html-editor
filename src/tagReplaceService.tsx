@@ -1,5 +1,4 @@
-import React, { Component, useState, CSSProperties } from 'react';
-import { getCSSForJSX } from './cssConverterService';
+import React, { Component } from 'react';
 import { convertAllAttributes, AllJSXAttributes } from './attributesConverterService';
 import { renderToString } from 'react-dom/server';
 import  {GrayHTMLTags, sanitizeGrayTags, WhiteAndGrayAttributes} from './grayTagSanityzerService';

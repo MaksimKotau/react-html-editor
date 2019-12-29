@@ -1,5 +1,5 @@
 
-import {JSXCSSParam, JSXCSSAttribute, getCSSForJSX} from './cssConverterService';
+import {JSXCSSAttribute, getCSSForJSX} from './cssConverterService';
 
 export type HTMLAttributes = "style" | "title" | "class" | "id";
 export type JSXAttributes = "style" | "title" | "className" | "id";
