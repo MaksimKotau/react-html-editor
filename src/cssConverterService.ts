@@ -80,8 +80,5 @@ export const getCSSForJSX = (attr: Attr): JSXCSSAttribute => {
             }
         })
     })
-    console.log('----');
-    console.log(attr);
-    console.log(foundJSXCSSParam)
     return foundJSXCSSParam;
 }
