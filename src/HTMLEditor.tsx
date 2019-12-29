@@ -8,6 +8,10 @@ import ItalicTextButton from './buttonForms/ItalicTextButton';
 import UnderlinedTextButton from './buttonForms/UnderlinedTextButton';
 import AddLinkButton from './buttonForms/AddLinkButton';
 import HeaderButton from './buttonForms/HeaderButton';
+import TextAlignRight from './buttonForms/TextAlignRight';
+import TextAlignLeft from './buttonForms/TextAlignLeft';
+import TextAlignCenter from './buttonForms/TextAlignCenter';
+import TextAlignJustify from './buttonForms/TextAlignJustify';
 
 const buttons: ToolbarButtonProps[] = [
   {
@@ -27,8 +31,19 @@ const buttons: ToolbarButtonProps[] = [
   },
   {
     element: <HeaderButton />
+  },
+  {
+    element: <TextAlignLeft />
+  },
+  {
+    element: <TextAlignCenter />
+  },
+  {
+    element: <TextAlignRight />
+  },
+  {
+    element: <TextAlignJustify />
   }
-
 ]
 
 
