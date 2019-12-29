@@ -3,11 +3,11 @@ import './HTMLEditor.css';
 import { ArticleDOMNode } from './tagReplaceService'
 import ToolbarButton, { ToolbarButtonProps } from './ToolbarButton'
 import TextColorSelect from './buttonForms/TextColorSelect';
-import sd from './buttonForms/BoldTextButton';
 import BoldTextButton from './buttonForms/BoldTextButton';
 import ItalicTextButton from './buttonForms/ItalicTextButton';
 import UnderlinedTextButton from './buttonForms/UnderlinedTextButton';
 import AddLinkButton from './buttonForms/AddLinkButton';
+import HeaderButton from './buttonForms/HeaderButton';
 
 const buttons: ToolbarButtonProps[] = [
   {
@@ -24,6 +24,9 @@ const buttons: ToolbarButtonProps[] = [
   },
   {
     element: <TextColorSelect />
+  },
+  {
+    element: <HeaderButton />
   }
 
 ]
@@ -42,10 +45,6 @@ interface OwnState {
 
 
 class HTMLEditor extends Component<OwnProps, OwnState> {
-  constructor(props: OwnProps) {
-    super(props);
-
-  }
   componentDidUpdate(prevProps: OwnProps, prevState: OwnState) {
 
   }

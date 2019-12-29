@@ -26,3 +26,6 @@ article p {
     flex-direction: row;
     align-items: flex-start;
 }
+.listElement:hover {
+    background-color: lightgray;
+}
