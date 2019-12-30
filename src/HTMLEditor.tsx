@@ -12,6 +12,7 @@ import TextAlignRight from './buttonForms/TextAlignRight';
 import TextAlignLeft from './buttonForms/TextAlignLeft';
 import TextAlignCenter from './buttonForms/TextAlignCenter';
 import TextAlignJustify from './buttonForms/TextAlignJustify';
+import CodeButton from './buttonForms/CodeButton';
 
 const buttons: ToolbarButtonProps[] = [
   {
@@ -43,6 +44,9 @@ const buttons: ToolbarButtonProps[] = [
   },
   {
     element: <TextAlignJustify />
+  },
+  {
+    element: <CodeButton />
   }
 ]
 
