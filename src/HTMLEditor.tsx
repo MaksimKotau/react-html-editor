@@ -15,6 +15,8 @@ import TextAlignJustify from './buttonForms/TextAlignJustify';
 import CodeButton from './buttonForms/CodeButton';
 import OrderedListButton from './buttonForms/OrderedListButton';
 import UnorderedListButton from './buttonForms/UnorderedListButton';
+import UndoButton from './buttonForms/UndoButton';
+import RedoButton from './buttonForms/RedoButton';
 
 const buttons: ToolbarButtonProps[] = [
   {
@@ -55,6 +57,12 @@ const buttons: ToolbarButtonProps[] = [
   },
   {
     element: <UnorderedListButton />
+  },
+  { 
+    element: <UndoButton />
+  },
+  {
+    element: <RedoButton />
   }
 ]
 
