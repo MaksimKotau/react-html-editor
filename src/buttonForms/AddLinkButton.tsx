@@ -45,6 +45,7 @@ const AddLinkButton: React.SFC<{}> = () => {
                     left: "calc(50% - 150px)",
                     boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 12px 0 rgba(0, 0, 0, 0.19)",
                     padding: 20,
+                    backgroundColor: "white"
                 }}>
                     <div style={{ padding: 10, width: "100%" }}>
                         <label>Adress: </label>
