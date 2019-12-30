@@ -13,6 +13,7 @@ import TextAlignLeft from './buttonForms/TextAlignLeft';
 import TextAlignCenter from './buttonForms/TextAlignCenter';
 import TextAlignJustify from './buttonForms/TextAlignJustify';
 import CodeButton from './buttonForms/CodeButton';
+import OrderedListButton from './buttonForms/OrderedListButton';
 
 const buttons: ToolbarButtonProps[] = [
   {
@@ -47,6 +48,9 @@ const buttons: ToolbarButtonProps[] = [
   },
   {
     element: <CodeButton />
+  },
+  {
+    element: <OrderedListButton />
   }
 ]
 
