@@ -1,6 +1,6 @@
 import {AllJSXAttributes, convertAllAttributes} from './attributesConverterService';
 
-const attributeJSSanitizer = (value: string): string => {
+export const attributeJSSanitizer = (value: string): string => {
     return value.toLowerCase().indexOf('javascript') > -1 ? "" : value;
 }
 
