@@ -18,6 +18,8 @@ import UnorderedListButton from './buttonForms/UnorderedListButton';
 import UndoButton from './buttonForms/UndoButton';
 import RedoButton from './buttonForms/RedoButton';
 import StrikeTextButton from './buttonForms/StrikeTextButton';
+import SubTextButton from './buttonForms/SubTextButton';
+import SupTextButton from './buttonForms/SupTextButton';
 
 const buttons: ToolbarButtonProps[] = [
   {
@@ -31,6 +33,12 @@ const buttons: ToolbarButtonProps[] = [
   },
   {
     element: <StrikeTextButton />
+  },
+  {
+    element: <SubTextButton />
+  },
+  {
+    element: <SupTextButton />
   },
   {
     element: <AddLinkButton/>
