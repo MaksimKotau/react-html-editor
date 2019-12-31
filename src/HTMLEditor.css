@@ -25,6 +25,7 @@ article p {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 .listElement:hover {
     background-color: lightgray;
