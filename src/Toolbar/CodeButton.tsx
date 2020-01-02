@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Portal from './PortalModal';
-import {restoreSelection, saveSelection} from '../helpers/linkHelper';
+import {restoreSelection, saveSelection} from './helpers/linkHelper';
 
 const CodeButton: React.FC<{}> = () => {
     const [codeSnippet, setCodeSnippet] = useState<string>("");

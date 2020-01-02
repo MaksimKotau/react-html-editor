@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Portal from './PortalModal';
-import { restoreSelection, saveSelection } from '../helpers/linkHelper';
-import {attributeJSSanitizer} from '../grayTagSanityzerService'
+import { restoreSelection, saveSelection } from './helpers/linkHelper';
+import { attributeJSSanitizer } from '../service/grayTagSanityzerService'
 
 const AddLinkButton: React.SFC<{}> = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
@@ -66,12 +66,13 @@ const AddLinkButton: React.SFC<{}> = () => {
                     <div style={{ padding: 10, width: "100%" }}>
                         <label>Rel:
                         <select
+                                value={rel}
                                 style={{ width: 250, height: 30, marginLeft: 15 }}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => { setRel(e.target.value) }}
                             >
                                 {relTypes.sort().map(el => {
                                     return (
-                                        <option value={el} selected={el === rel ? true : undefined}>{el}</option>
+                                        <option key={el} value={el}>{el}</option>
                                     )
                                 })}
                             </select>
