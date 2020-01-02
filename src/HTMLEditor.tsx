@@ -6,6 +6,7 @@ import Toolbar from './toolbar/Toolbar'
 interface OwnProps {
   value: string;
   onChange(value: string): void;
+  readonly?: boolean;
 }
 
 interface OwnState {
@@ -19,9 +20,9 @@ class HTMLEditor extends Component<OwnProps, OwnState> {
   render() {
     return (
       <div>
-        <Toolbar />
+        {!this.props.readonly && <Toolbar />}
         <div>
-          <ArticleDOMNode onChange={this.props.onChange} value={this.props.value} />
+          <ArticleDOMNode onChange={this.props.onChange} value={this.props.value} readonly={this.props.readonly}/>
         </div>
 
       </div>

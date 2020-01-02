@@ -94,6 +94,7 @@ export const ChildNodes: React.SFC<ChildNodeProps> = (props) => {
 interface HTMLEditorProps {
     value: string;
     onChange(value: string): void;
+    readonly?: boolean;
 }
 
 export class ArticleDOMNode extends Component<HTMLEditorProps> {
@@ -116,7 +117,7 @@ export class ArticleDOMNode extends Component<HTMLEditorProps> {
     }
     render() {
         return (
-            <article ref={(elem: HTMLElement) => this.articleRef = elem!} suppressContentEditableWarning={true} contentEditable key={'article_editor'}><ChildNodes value={`<article>${this.props.value.replace(/<article[^>]*>/, '').replace('</article>', '')}</article>`} uniq_key={'article_editor'} /></article>
+            <article style={{border: this.props.readonly ? undefined : "1px solid #999"}} ref={(elem: HTMLElement) => this.articleRef = elem!} suppressContentEditableWarning={true} contentEditable={!this.props.readonly} key={'article_editor'}><ChildNodes value={`<article>${this.props.value.replace(/<article[^>]*>/, '').replace('</article>', '')}</article>`} uniq_key={'article_editor'} /></article>
         )
     }
 }

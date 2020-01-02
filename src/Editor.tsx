@@ -16,7 +16,7 @@ class Editor extends Component<{}, OwnState> {
     render() {
         return (
             <div>
-                <HTMLEditor value={this.state.value} onChange={this.onChange} />
+                <HTMLEditor value={this.state.value} onChange={this.onChange}/>
             </div>
         );  
     }
