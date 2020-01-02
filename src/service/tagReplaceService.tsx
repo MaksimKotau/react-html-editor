@@ -101,7 +101,6 @@ export class ArticleDOMNode extends Component<HTMLEditorProps> {
     private articleRef: HTMLElement | undefined = undefined;
     componentDidMount() {
         this.articleRef!.addEventListener('DOMSubtreeModified', (e) => this.onDomeNodeChange(`<article>${this.articleRef!.outerHTML.replace(/<article[^>]*>/, '').replace('</article>', '')}</article>`))
-        //this.articleRef!.addEventListener('DOMSubtreeModified', (e) => this.props.onChange(`<article>${this.articleRef!.innerHTML}</article>`))
         this.articleRef!.addEventListener('paste', (e: ClipboardEvent) => {
             e.preventDefault();
             const html = ((e as any).originalEvent || e).clipboardData.getData('text/html');
