@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './HTMLEditor.css';
 import { ArticleDOMNode } from './service/tagReplaceService'
-import Toolbar from './Toolbar/Toolbar'
+import Toolbar from './toolbar/Toolbar'
 
 interface OwnProps {
   value: string;
@@ -11,8 +11,6 @@ interface OwnProps {
 interface OwnState {
   value: string;
 }
-
-
 
 class HTMLEditor extends Component<OwnProps, OwnState> {
   componentDidUpdate(prevProps: OwnProps, prevState: OwnState) {

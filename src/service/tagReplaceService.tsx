@@ -116,7 +116,7 @@ export class ArticleDOMNode extends Component<HTMLEditorProps> {
     }
     render() {
         return (
-            <article id="HTMLTextEditor" ref={(elem: HTMLElement) => this.articleRef = elem!} suppressContentEditableWarning={true} contentEditable key={'article_editor'}><ChildNodes value={`<article>${this.props.value.replace(/<article[^>]*>/, '').replace('</article>', '')}</article>`} uniq_key={'article_editor'} /></article>
+            <article ref={(elem: HTMLElement) => this.articleRef = elem!} suppressContentEditableWarning={true} contentEditable key={'article_editor'}><ChildNodes value={`<article>${this.props.value.replace(/<article[^>]*>/, '').replace('</article>', '')}</article>`} uniq_key={'article_editor'} /></article>
         )
     }
 }
