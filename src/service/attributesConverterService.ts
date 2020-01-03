@@ -28,7 +28,7 @@ export const AttributesConvert: AttrSanityzerTypes[] = [
     }
 ];
 
-type AttributesWithoutCSS = Exclude<JSXAttributes, "style">;
+export type AttributesWithoutCSS = Exclude<JSXAttributes, "style">;
 
 export type AllJSXAttributes = Partial<Record<AttributesWithoutCSS, string> & JSXCSSAttribute>;
 

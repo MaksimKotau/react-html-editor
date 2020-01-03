@@ -2,6 +2,8 @@
   "name": "react-html-editor",
   "version": "0.1.0",
   "private": true,
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "dependencies": {
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.5",
