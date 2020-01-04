@@ -10,7 +10,6 @@ enum HeaderType {
     H6 = "Header 6"
 }
 
-
 const HeaderButton: React.FC<{}> = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);

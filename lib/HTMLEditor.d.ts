@@ -1,6 +1,4 @@
-/// <reference types="react" />
 import { Component } from 'react';
-import './HTMLEditor.css';
 export interface OwnProps {
     value: string;
     onChange(value: string): void;

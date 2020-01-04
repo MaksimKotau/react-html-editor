@@ -78,11 +78,18 @@ const buttons: ToolbarButtonProps[] = [
     {
       element: <AddImageButton />
     }
-  ]
+  ];
+
+ const toolbarStyle: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "flex-start",
+    flexWrap: "wrap"
+}
 
 const Toolbar: React.FC = () => {
     return (
-        <div id="htmleditor_toolbar">
+        <div id="htmleditor_toolbar" style={{...toolbarStyle}}>
           {buttons.map((el, index) => (
             <ToolbarButton key={`HTML_Editor_Button_${index}`}
               element={el.element}

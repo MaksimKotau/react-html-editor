@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './HTMLEditor.css';
 import { ArticleDOMNode } from './service/tagReplaceService'
 import Toolbar from './toolbar/Toolbar'
 
