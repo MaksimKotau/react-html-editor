@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Portal from './PortalModal';
+import React, { useState, useEffect } from 'react';
 import Dialog from '@material-ui/core/Dialog';
+import {restoreSelection, saveSelection} from './helpers/linkHelper'
 
 enum HeaderType {
     H1 = "Header 1",
@@ -13,7 +13,10 @@ enum HeaderType {
 
 const HeaderButton: React.FC<{}> = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [selection, setSelection] = useState<Range[] | null | undefined>(null);
+    useEffect(() => setSelection(saveSelection()), [showModal]);
     const addHeader = (header: string) => {
+        restoreSelection(selection);
         document.execCommand('formatBlock', false, `<${header}>`)
         setShowModal(false);
     }
